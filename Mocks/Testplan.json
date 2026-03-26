@@ -1,0 +1,458 @@
+{
+  "schemaVersion": "1.0.0",
+  "planVersion": "2026.03.24.001",
+  "planId": "TP-TAB10-DEMO-001",
+  "name": "Plano FCT - TAB10 DEMO",
+  "description": "Plano de testes funcionais para tablet TAB10 DEMO na linha de produção.",
+  "status": "PUBLISHED",
+  "publishedAt": "2026-03-24T10:30:00Z",
+  "publishedBy": "jonathan.campoi",
+  "checksum": "sha256:9b8b7f1f9c2b1e5c0f7d8a9c6e4f2a1d7b8c9e0f1a2b3c4d5e6f7a8b9c0d1e2",
+  "signature": "BASE64_SIGNATURE_PLACEHOLDER",
+
+  "product": {
+    "modelId": "TAB10_DEMO",
+    "sku": "ML-TAB10-4G-64GB",
+    "family": "TABLET",
+    "androidMinVersion": 13,
+    "firmwareConstraint": {
+      "minBuildFingerprint": "MULTI/TAB10_DEMO/TAB10:13/",
+      "allowedBuildTags": ["user", "userdebug"]
+    }
+  },
+
+  "capabilities": {
+    "hasTelephony": true,
+    "hasImei": true,
+    "hasSim": true,
+    "hasSdCard": true,
+    "hasGps": true,
+    "hasBluetooth": true,
+    "hasWifi": true,
+    "hasFrontCamera": true,
+    "hasRearCamera": true,
+    "hasReceiver": true,
+    "hasSpeaker": true,
+    "hasMic": true,
+    "hasUsbC": true,
+    "hasP2": false,
+    "hasBattery": true
+  },
+
+  "executionPolicy": {
+    "mode": "SEQUENTIAL_LOCKED",
+    "allowOperatorSkip": false,
+    "allowManualOverride": false,
+    "stopOnCriticalFailure": true,
+    "persistAfterEachStep": true,
+    "resumeInterruptedExecution": true,
+    "maxExecutionTimeSec": 900
+  },
+
+  "stationPolicy": {
+    "stationType": "FCT_MAIN",
+    "requiredStationId": true,
+    "requiredOperatorLogin": true,
+    "requiredPalletBind": true,
+    "bindKeys": ["slotId", "serialNumber"]
+  },
+
+  "resultPolicy": {
+    "uploadMode": "ONLINE_OR_OUTBOX",
+    "idempotencyKeyMode": "EXECUTION_ID",
+    "storeTechnicalLogs": true,
+    "storeStepMetrics": true,
+    "storeEvidence": true
+  },
+
+  "identification": {
+    "serialNumber": {
+      "required": true,
+      "source": "SYSTEM_PROPERTY_OR_SCAN",
+      "pattern": "^[A-Z0-9\\-]{8,30}$"
+    },
+    "imei": {
+      "required": true,
+      "source": "TELEPHONY",
+      "validation": {
+        "length": 15,
+        "luhn": true
+      }
+    }
+  },
+
+  "environment": {
+    "wifi": {
+      "targetSsid": "MULTILASER_FCT",
+      "security": "WPA2",
+      "minRssiDbm": -65,
+      "stabilityWindowSec": 10
+    },
+    "bluetooth": {
+      "scanTimeoutSec": 15,
+      "minDevicesFound": 1,
+      "minRelativeRssiDbm": -80
+    },
+    "gps": {
+      "maxFixTimeSec": 60,
+      "minSatellites": 4,
+      "minAccuracyMeters": 25.0
+    }
+  },
+
+  "thresholdProfiles": {
+    "audio": {
+      "speaker": {
+        "minPeakDb": -18.0,
+        "maxNoiseFloorDb": -55.0,
+        "expectedFreqHz": 1000,
+        "toleranceHz": 80
+      },
+      "receiver": {
+        "minPeakDb": -20.0,
+        "maxNoiseFloorDb": -58.0,
+        "expectedFreqHz": 1000,
+        "toleranceHz": 80
+      },
+      "microphone": {
+        "minCapturedDb": -24.0,
+        "maxClippingPercent": 2.0
+      }
+    },
+    "camera": {
+      "rear": {
+        "minBlurScore": 120.0,
+        "minBrightness": 80.0,
+        "maxBrightness": 220.0,
+        "chartRequired": true,
+        "minSsim": 0.82
+      },
+      "front": {
+        "minBlurScore": 100.0,
+        "minBrightness": 70.0,
+        "maxBrightness": 220.0,
+        "chartRequired": false
+      }
+    }
+  },
+
+  "steps": [
+    {
+      "stepId": "STEP-001",
+      "order": 1,
+      "testId": "IDENTIFY_DEVICE",
+      "name": "Identificação do dispositivo",
+      "type": "AUTOMATED",
+      "group": "IDENTIFICATION",
+      "critical": true,
+      "enabled": true,
+      "timeoutSec": 20,
+      "retries": 0,
+      "capabilityRequired": [],
+      "passCriteria": {
+        "serialNumberRequired": true,
+        "imeiRequired": true,
+        "modelMatchRequired": true
+      },
+      "params": {
+        "collectBuildInfo": true,
+        "collectAndroidVersion": true,
+        "collectDeviceFingerprint": true
+      },
+      "onFail": {
+        "action": "STOP_EXECUTION",
+        "resultCode": "NG_IDENTIFICATION"
+      }
+    },
+    {
+      "stepId": "STEP-002",
+      "order": 2,
+      "testId": "CHECK_WIFI",
+      "name": "Validação Wi-Fi",
+      "type": "AUTOMATED",
+      "group": "CONNECTIVITY",
+      "critical": true,
+      "enabled": true,
+      "timeoutSec": 40,
+      "retries": 1,
+      "capabilityRequired": ["hasWifi"],
+      "passCriteria": {
+        "mustConnectToTargetSsid": true,
+        "minRssiDbm": -65,
+        "stabilityWindowSec": 10
+      },
+      "params": {
+        "targetSsid": "MULTILASER_FCT",
+        "recordIpAddress": true
+      },
+      "onFail": {
+        "action": "STOP_EXECUTION",
+        "resultCode": "NG_WIFI"
+      }
+    },
+    {
+      "stepId": "STEP-003",
+      "order": 3,
+      "testId": "CHECK_BLUETOOTH_SCAN",
+      "name": "Validação Bluetooth",
+      "type": "AUTOMATED",
+      "group": "CONNECTIVITY",
+      "critical": false,
+      "enabled": true,
+      "timeoutSec": 20,
+      "retries": 1,
+      "capabilityRequired": ["hasBluetooth"],
+      "passCriteria": {
+        "minDevicesFound": 1
+      },
+      "params": {
+        "scanTimeoutSec": 15,
+        "minRelativeRssiDbm": -80
+      },
+      "onFail": {
+        "action": "CONTINUE_AND_MARK_FAIL",
+        "resultCode": "NG_BLUETOOTH"
+      }
+    },
+    {
+      "stepId": "STEP-004",
+      "order": 4,
+      "testId": "CHECK_SIM_PRESENCE",
+      "name": "Validação SIM",
+      "type": "AUTOMATED",
+      "group": "CONNECTIVITY",
+      "critical": false,
+      "enabled": true,
+      "timeoutSec": 15,
+      "retries": 0,
+      "capabilityRequired": ["hasSim"],
+      "passCriteria": {
+        "simMustBePresent": true
+      },
+      "params": {
+        "acceptedStates": ["READY", "LOADED"]
+      },
+      "onFail": {
+        "action": "CONTINUE_AND_MARK_FAIL",
+        "resultCode": "NG_SIM"
+      }
+    },
+    {
+      "stepId": "STEP-005",
+      "order": 5,
+      "testId": "CHECK_GPS_FIX",
+      "name": "Validação GPS",
+      "type": "AUTOMATED",
+      "group": "CONNECTIVITY",
+      "critical": false,
+      "enabled": true,
+      "timeoutSec": 70,
+      "retries": 0,
+      "capabilityRequired": ["hasGps"],
+      "passCriteria": {
+        "maxFixTimeSec": 60,
+        "minSatellites": 4,
+        "minAccuracyMeters": 25.0
+      },
+      "params": {
+        "warmupSec": 10
+      },
+      "onFail": {
+        "action": "CONTINUE_AND_MARK_FAIL",
+        "resultCode": "NG_GPS"
+      }
+    },
+    {
+      "stepId": "STEP-006",
+      "order": 6,
+      "testId": "CHECK_HW_PROFILE",
+      "name": "Validação CPU RAM ROM",
+      "type": "AUTOMATED",
+      "group": "HARDWARE",
+      "critical": true,
+      "enabled": true,
+      "timeoutSec": 15,
+      "retries": 0,
+      "capabilityRequired": [],
+      "passCriteria": {
+        "mustMatchRecipe": true
+      },
+      "params": {
+        "expectedRamMb": 4096,
+        "expectedStorageGb": 64,
+        "cpuFamily": "UNISOC"
+      },
+      "onFail": {
+        "action": "STOP_EXECUTION",
+        "resultCode": "NG_HW_PROFILE"
+      }
+    },
+    {
+      "stepId": "STEP-007",
+      "order": 7,
+      "testId": "CHECK_BATTERY_USB",
+      "name": "Validação bateria e USB",
+      "type": "AUTOMATED",
+      "group": "POWER",
+      "critical": true,
+      "enabled": true,
+      "timeoutSec": 20,
+      "retries": 0,
+      "capabilityRequired": ["hasBattery", "hasUsbC"],
+      "passCriteria": {
+        "batteryPresent": true,
+        "usbAttached": true,
+        "chargingDetected": true,
+        "batteryTempMaxC": 45.0
+      },
+      "params": {
+        "collectBatteryHealth": true,
+        "collectBatteryLevel": true
+      },
+      "onFail": {
+        "action": "STOP_EXECUTION",
+        "resultCode": "NG_POWER"
+      }
+    },
+    {
+      "stepId": "STEP-008",
+      "order": 8,
+      "testId": "CHECK_AUDIO_SPEAKER_MIC",
+      "name": "Validação speaker e microfone",
+      "type": "AUTOMATED",
+      "group": "AUDIO",
+      "critical": false,
+      "enabled": true,
+      "timeoutSec": 45,
+      "retries": 1,
+      "capabilityRequired": ["hasSpeaker", "hasMic"],
+      "passCriteria": {
+        "speakerMinPeakDb": -18.0,
+        "micMinCapturedDb": -24.0
+      },
+      "params": {
+        "toneFrequencyHz": 1000,
+        "toneDurationMs": 3000,
+        "fftWindowSize": 4096,
+        "useLoopback": false
+      },
+      "onFail": {
+        "action": "CONTINUE_AND_MARK_FAIL",
+        "resultCode": "NG_AUDIO"
+      }
+    },
+    {
+      "stepId": "STEP-009",
+      "order": 9,
+      "testId": "CHECK_CAMERA_REAR",
+      "name": "Validação câmera traseira",
+      "type": "AUTOMATED",
+      "group": "CAMERA",
+      "critical": false,
+      "enabled": true,
+      "timeoutSec": 50,
+      "retries": 1,
+      "capabilityRequired": ["hasRearCamera"],
+      "passCriteria": {
+        "minBlurScore": 120.0,
+        "chartRequired": true,
+        "minSsim": 0.82
+      },
+      "params": {
+        "cameraLens": "REAR",
+        "captureCount": 3,
+        "useChartComparison": true
+      },
+      "onFail": {
+        "action": "CONTINUE_AND_MARK_FAIL",
+        "resultCode": "NG_CAMERA_REAR"
+      }
+    },
+    {
+      "stepId": "STEP-010",
+      "order": 10,
+      "testId": "CHECK_CAMERA_FRONT",
+      "name": "Validação câmera frontal",
+      "type": "AUTOMATED",
+      "group": "CAMERA",
+      "critical": false,
+      "enabled": true,
+      "timeoutSec": 40,
+      "retries": 1,
+      "capabilityRequired": ["hasFrontCamera"],
+      "passCriteria": {
+        "minBlurScore": 100.0
+      },
+      "params": {
+        "cameraLens": "FRONT",
+        "captureCount": 2,
+        "useChartComparison": false
+      },
+      "onFail": {
+        "action": "CONTINUE_AND_MARK_FAIL",
+        "resultCode": "NG_CAMERA_FRONT"
+      }
+    },
+    {
+      "stepId": "STEP-011",
+      "order": 11,
+      "testId": "FINAL_SUMMARY",
+      "name": "Resumo final",
+      "type": "SYSTEM",
+      "group": "FINALIZATION",
+      "critical": true,
+      "enabled": true,
+      "timeoutSec": 10,
+      "retries": 0,
+      "capabilityRequired": [],
+      "passCriteria": {
+        "allCriticalTestsMustPass": true
+      },
+      "params": {
+        "showOperatorSummary": true,
+        "generateExecutionHash": true
+      },
+      "onFail": {
+        "action": "MARK_FINAL_NG",
+        "resultCode": "NG_FINAL"
+      }
+    }
+  ],
+
+  "finalDecisionPolicy": {
+    "passIf": {
+      "allCriticalStepsPassed": true
+    },
+    "failIf": {
+      "anyCriticalStepFailed": true
+    },
+    "ngClassification": {
+      "criticalFailure": "HARD_NG",
+      "nonCriticalFailure": "SOFT_NG"
+    }
+  },
+
+  "offlinePolicy": {
+    "enabled": true,
+    "localQueueEnabled": true,
+    "maxPendingExecutions": 5000,
+    "retryPolicy": {
+      "strategy": "EXPONENTIAL_BACKOFF",
+      "maxRetries": 10,
+      "initialDelayMs": 5000,
+      "maxDelayMs": 300000
+    }
+  },
+
+  "audit": {
+    "requirePublicationAudit": true,
+    "fieldsTracked": [
+      "planVersion",
+      "publishedBy",
+      "publishedAt",
+      "steps",
+      "thresholdProfiles",
+      "capabilities"
+    ]
+  }
+}
