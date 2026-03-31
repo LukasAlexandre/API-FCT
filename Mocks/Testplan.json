@@ -16,7 +16,8 @@
     "family": "TABLET",
     "androidMinVersion": 13,
     "firmwareConstraint": {
-      "minBuildFingerprint": "MULTI/TAB10_DEMO/TAB10:13/",
+     // fingerprint
+      "minBuildFingerprint": "MULTI/TAB10_DEMO/TAB10:13",
       "allowedBuildTags": ["user", "userdebug"]
     }
   },

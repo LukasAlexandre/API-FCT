@@ -1,43 +1,44 @@
-﻿
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 public class TestPlanDto
 {
-    public string schemaVersion { get; set; }
-    public string planVersion { get; set; }
-    public string planId { get; set; }
-    public string name { get; set; }
-    public string description { get; set; }
-    public string status { get; set; }
+    public required string schemaVersion { get; set; }
+    public required string planVersion { get; set; }
+    public required string planId { get; set; }
+    public required string name { get; set; }
+    public required string description { get; set; }
+    public required string status { get; set; }
     public DateTime publishedAt { get; set; }
-    public string publishedBy { get; set; }
-    public string checksum { get; set; }
-    public string signature { get; set; }
-    public Product product { get; set; }
-    public Capabilities capabilities { get; set; }
-    public Executionpolicy executionPolicy { get; set; }
-    public Stationpolicy stationPolicy { get; set; }
-    public Resultpolicy resultPolicy { get; set; }
-    public Identification identification { get; set; }
-    public Environment environment { get; set; }
-    public Thresholdprofiles thresholdProfiles { get; set; }
-    public Step[] steps { get; set; }
-    public Finaldecisionpolicy finalDecisionPolicy { get; set; }
-    public Offlinepolicy offlinePolicy { get; set; }
-    public Audit audit { get; set; }
+    public required string publishedBy { get; set; }
+    public required string checksum { get; set; }
+    public required string signature { get; set; }
+    public required Product product { get; set; }
+    public required Capabilities capabilities { get; set; }
+    public required Executionpolicy executionPolicy { get; set; }
+    public required Stationpolicy stationPolicy { get; set; }
+    public required Resultpolicy resultPolicy { get; set; }
+    public required Identification identification { get; set; }
+    public required TestEnvironment Environment { get; set; }
+    public required Thresholdprofiles thresholdProfiles { get; set; }
+    public required Step[] steps { get; set; }
+    public required Finaldecisionpolicy finalDecisionPolicy { get; set; }
+    public required Offlinepolicy offlinePolicy { get; set; }
+    public required Audit audit { get; set; }
 }
 
 public class Product
 {
-    public string modelId { get; set; }
-    public string sku { get; set; }
-    public string family { get; set; }
+    public required string modelId { get; set; }
+    public required string sku { get; set; }
+    public required string family { get; set; }
     public int androidMinVersion { get; set; }
-    public Firmwareconstraint firmwareConstraint { get; set; }
+    public required Firmwareconstraint firmwareConstraint { get; set; }
 }
 
 public class Firmwareconstraint
 {
-    public string minBuildFingerprint { get; set; }
-    public string[] allowedBuildTags { get; set; }
+    public required string minBuildFingerprint { get; set; }
+    public required string[] allowedBuildTags { get; set; }
 }
 
 public class Capabilities
@@ -61,7 +62,7 @@ public class Capabilities
 
 public class Executionpolicy
 {
-    public string mode { get; set; }
+    public required string mode { get; set; }
     public bool allowOperatorSkip { get; set; }
     public bool allowManualOverride { get; set; }
     public bool stopOnCriticalFailure { get; set; }
@@ -72,17 +73,17 @@ public class Executionpolicy
 
 public class Stationpolicy
 {
-    public string stationType { get; set; }
+    public required string stationType { get; set; }
     public bool requiredStationId { get; set; }
     public bool requiredOperatorLogin { get; set; }
     public bool requiredPalletBind { get; set; }
-    public string[] bindKeys { get; set; }
+    public required string[] bindKeys { get; set; }
 }
 
 public class Resultpolicy
 {
-    public string uploadMode { get; set; }
-    public string idempotencyKeyMode { get; set; }
+    public required string uploadMode { get; set; }
+    public required string idempotencyKeyMode { get; set; }
     public bool storeTechnicalLogs { get; set; }
     public bool storeStepMetrics { get; set; }
     public bool storeEvidence { get; set; }
@@ -90,22 +91,22 @@ public class Resultpolicy
 
 public class Identification
 {
-    public Serialnumber serialNumber { get; set; }
-    public Imei imei { get; set; }
+    public required Serialnumber serialNumber { get; set; }
+    public required Imei imei { get; set; }
 }
 
 public class Serialnumber
 {
     public bool required { get; set; }
-    public string source { get; set; }
-    public string pattern { get; set; }
+    public required string source { get; set; }
+    public required string pattern { get; set; }
 }
 
 public class Imei
 {
     public bool required { get; set; }
-    public string source { get; set; }
-    public Validation validation { get; set; }
+    public required string source { get; set; }
+    public required Validation validation { get; set; }
 }
 
 public class Validation
@@ -114,17 +115,17 @@ public class Validation
     public bool luhn { get; set; }
 }
 
-public class Environment
+public class TestEnvironment
 {
-    public Wifi wifi { get; set; }
-    public Bluetooth bluetooth { get; set; }
-    public Gps gps { get; set; }
+    public required Wifi wifi { get; set; }
+    public required Bluetooth bluetooth { get; set; }
+    public required Gps gps { get; set; }
 }
 
 public class Wifi
 {
-    public string targetSsid { get; set; }
-    public string security { get; set; }
+    public required string targetSsid { get; set; }
+    public required string security { get; set; }
     public int minRssiDbm { get; set; }
     public int stabilityWindowSec { get; set; }
 }
@@ -145,15 +146,15 @@ public class Gps
 
 public class Thresholdprofiles
 {
-    public Audio audio { get; set; }
-    public Camera camera { get; set; }
+    public required Audio audio { get; set; }
+    public required Camera camera { get; set; }
 }
 
 public class Audio
 {
-    public Speaker speaker { get; set; }
-    public Receiver receiver { get; set; }
-    public Microphone microphone { get; set; }
+    public required Speaker speaker { get; set; }
+    public required Receiver receiver { get; set; }
+    public required Microphone microphone { get; set; }
 }
 
 public class Speaker
@@ -180,8 +181,8 @@ public class Microphone
 
 public class Camera
 {
-    public Rear rear { get; set; }
-    public Front front { get; set; }
+    public required Rear rear { get; set; }
+    public required Front front { get; set; }
 }
 
 public class Rear
@@ -203,9 +204,9 @@ public class Front
 
 public class Finaldecisionpolicy
 {
-    public Passif passIf { get; set; }
-    public Failif failIf { get; set; }
-    public Ngclassification ngClassification { get; set; }
+    public required Passif passIf { get; set; }
+    public required Failif failIf { get; set; }
+    public required Ngclassification ngClassification { get; set; }
 }
 
 public class Passif
@@ -220,8 +221,8 @@ public class Failif
 
 public class Ngclassification
 {
-    public string criticalFailure { get; set; }
-    public string nonCriticalFailure { get; set; }
+    public required string criticalFailure { get; set; }
+    public required string nonCriticalFailure { get; set; }
 }
 
 public class Offlinepolicy
@@ -229,12 +230,12 @@ public class Offlinepolicy
     public bool enabled { get; set; }
     public bool localQueueEnabled { get; set; }
     public int maxPendingExecutions { get; set; }
-    public Retrypolicy retryPolicy { get; set; }
+    public required Retrypolicy retryPolicy { get; set; }
 }
 
 public class Retrypolicy
 {
-    public string strategy { get; set; }
+    public required string strategy { get; set; }
     public int maxRetries { get; set; }
     public int initialDelayMs { get; set; }
     public int maxDelayMs { get; set; }
@@ -243,25 +244,29 @@ public class Retrypolicy
 public class Audit
 {
     public bool requirePublicationAudit { get; set; }
-    public string[] fieldsTracked { get; set; }
+    public required string[] fieldsTracked { get; set; }
 }
 
 public class Step
 {
-    public string stepId { get; set; }
+    public required string stepId { get; set; }
     public int order { get; set; }
-    public string testId { get; set; }
-    public string name { get; set; }
-    public string type { get; set; }
-    public string group { get; set; }
+    public required string testId { get; set; }
+    public required string name { get; set; }
+    public required string type { get; set; }
+    public required string group { get; set; }
     public bool critical { get; set; }
     public bool enabled { get; set; }
     public int timeoutSec { get; set; }
     public int retries { get; set; }
-    public string[] capabilityRequired { get; set; }
-    public Passcriteria passCriteria { get; set; }
-    public Params _params { get; set; }
-    public Onfail onFail { get; set; }
+    public required string[] capabilityRequired { get; set; }
+
+
+ 
+    public JsonElement passCriteria { get; set; }
+
+    public JsonElement  @params { get; set; }
+    public required Onfail onFail { get; set; }
 }
 
 public class Passcriteria
@@ -295,22 +300,22 @@ public class Params
     public bool collectBuildInfo { get; set; }
     public bool collectAndroidVersion { get; set; }
     public bool collectDeviceFingerprint { get; set; }
-    public string targetSsid { get; set; }
+    public required string targetSsid { get; set; }
     public bool recordIpAddress { get; set; }
     public int scanTimeoutSec { get; set; }
     public int minRelativeRssiDbm { get; set; }
-    public string[] acceptedStates { get; set; }
+    public required string[] acceptedStates { get; set; }
     public int warmupSec { get; set; }
     public int expectedRamMb { get; set; }
     public int expectedStorageGb { get; set; }
-    public string cpuFamily { get; set; }
+    public required string cpuFamily { get; set; }
     public bool collectBatteryHealth { get; set; }
     public bool collectBatteryLevel { get; set; }
     public int toneFrequencyHz { get; set; }
     public int toneDurationMs { get; set; }
     public int fftWindowSize { get; set; }
     public bool useLoopback { get; set; }
-    public string cameraLens { get; set; }
+    public required string cameraLens { get; set; }
     public int captureCount { get; set; }
     public bool useChartComparison { get; set; }
     public bool showOperatorSummary { get; set; }
@@ -319,6 +324,6 @@ public class Params
 
 public class Onfail
 {
-    public string action { get; set; }
-    public string resultCode { get; set; }
+    public required string action { get; set; }
+    public required string resultCode { get; set; }
 }
