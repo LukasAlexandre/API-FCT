@@ -35,9 +35,9 @@ namespace API_BASE_FCT.Repositories
             return _testPlans.FirstOrDefault(plan =>
 
             plan != null && 
-            plan.product != null &&
-            plan.product.firmwareConstraint != null &&
-            plan.product.firmwareConstraint.minBuildFingerprint == fingerprint);
+            plan.Product != null &&
+            plan.Product.FirmwareConstraint != null &&
+            plan.Product.FirmwareConstraint.MinBuildFingerprint == fingerprint);
 
         }
     }
