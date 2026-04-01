@@ -2,328 +2,329 @@
 using System.Text.Json.Serialization;
 public class TestPlanDto
 {
-    public required string schemaVersion { get; set; }
-    public required string planVersion { get; set; }
-    public required string planId { get; set; }
-    public required string name { get; set; }
-    public required string description { get; set; }
-    public required string status { get; set; }
-    public DateTime publishedAt { get; set; }
-    public required string publishedBy { get; set; }
-    public required string checksum { get; set; }
-    public required string signature { get; set; }
-    public required Product product { get; set; }
-    public required Capabilities capabilities { get; set; }
-    public required Executionpolicy executionPolicy { get; set; }
-    public required Stationpolicy stationPolicy { get; set; }
-    public required Resultpolicy resultPolicy { get; set; }
-    public required Identification identification { get; set; }
+    public required string SchemaVersion { get; set; }
+    public required string PlanVersion { get; set; }
+    public required string PlanId { get; set; }
+    public required string Name { get; set; }
+    public required string Description { get; set; }
+    public required string Status { get; set; }
+    public DateTime PublishedAt { get; set; }
+    public required string PublishedBy { get; set; }
+    public required string Checksum { get; set; }
+    public required string Signature { get; set; }
+    public required Product Product { get; set; }
+    public required Capabilities Capabilities { get; set; }
+    public required ExecutionPolicy ExecutionPolicy { get; set; }
+    public required StationPolicy StationPolicy { get; set; }
+    public required ResultPolicy ResultPolicy { get; set; }
+    public required Identification Identification { get; set; }
     public required TestEnvironment Environment { get; set; }
-    public required Thresholdprofiles thresholdProfiles { get; set; }
-    public required Step[] steps { get; set; }
-    public required Finaldecisionpolicy finalDecisionPolicy { get; set; }
-    public required Offlinepolicy offlinePolicy { get; set; }
-    public required Audit audit { get; set; }
+    public required ThresholdProfiles ThresholdProfiles { get; set; }
+    public required Step[] Steps { get; set; }
+    public required FinalDecisionPolicy FinalDecisionPolicy { get; set; }
+    public required OfflinePolicy OfflinePolicy { get; set; }
+    public required Audit Audit { get; set; }
 }
 
 public class Product
 {
-    public required string modelId { get; set; }
-    public required string sku { get; set; }
-    public required string family { get; set; }
-    public int androidMinVersion { get; set; }
-    public required Firmwareconstraint firmwareConstraint { get; set; }
+    public required string ModelId { get; set; }
+    public required string Sku { get; set; }
+    public required string Family { get; set; }
+    public int AndroidMinVersion { get; set; }
+    public required FirmwareConstraint FirmwareConstraint { get; set; }
 }
 
-public class Firmwareconstraint
+public class FirmwareConstraint
 {
-    public required string minBuildFingerprint { get; set; }
-    public required string[] allowedBuildTags { get; set; }
+    public required string MinBuildFingerprint { get; set; }
+    public required string[] AllowedBuildTags { get; set; }
 }
 
 public class Capabilities
 {
-    public bool hasTelephony { get; set; }
-    public bool hasImei { get; set; }
-    public bool hasSim { get; set; }
-    public bool hasSdCard { get; set; }
-    public bool hasGps { get; set; }
-    public bool hasBluetooth { get; set; }
-    public bool hasWifi { get; set; }
-    public bool hasFrontCamera { get; set; }
-    public bool hasRearCamera { get; set; }
-    public bool hasReceiver { get; set; }
-    public bool hasSpeaker { get; set; }
-    public bool hasMic { get; set; }
-    public bool hasUsbC { get; set; }
-    public bool hasP2 { get; set; }
-    public bool hasBattery { get; set; }
+    public bool HasTelephony { get; set; }
+    public bool HasImei { get; set; }
+    public bool HasSim { get; set; }
+    public bool HasSdCard { get; set; }
+    public bool HasGps { get; set; }
+    public bool HasBluetooth { get; set; }
+    public bool HasWifi { get; set; }
+    public bool HasFrontCamera { get; set; }
+    public bool HasRearCamera { get; set; }
+    public bool HasReceiver { get; set; }
+    public bool HasSpeaker { get; set; }
+    public bool HasMic { get; set; }
+    public bool HasUsbC { get; set; }
+    public bool HasP2 { get; set; }
+    public bool HasBattery { get; set; }
 }
 
-public class Executionpolicy
+public class ExecutionPolicy
 {
-    public required string mode { get; set; }
-    public bool allowOperatorSkip { get; set; }
-    public bool allowManualOverride { get; set; }
-    public bool stopOnCriticalFailure { get; set; }
-    public bool persistAfterEachStep { get; set; }
-    public bool resumeInterruptedExecution { get; set; }
-    public int maxExecutionTimeSec { get; set; }
+    public required string Mode { get; set; }
+    public bool AllowOperatorSkip { get; set; }
+    public bool AllowManualOverride { get; set; }
+    public bool StopOnCriticalFailure { get; set; }
+    public bool PersistAfterEachStep { get; set; }
+    public bool ResumeInterruptedExecution { get; set; }
+    public int MaxExecutionTimeSec { get; set; }
 }
 
-public class Stationpolicy
+public class StationPolicy
 {
-    public required string stationType { get; set; }
-    public bool requiredStationId { get; set; }
-    public bool requiredOperatorLogin { get; set; }
-    public bool requiredPalletBind { get; set; }
-    public required string[] bindKeys { get; set; }
+    public required string StationType { get; set; }
+    public bool RequiredStationId { get; set; }
+    public bool RequiredOperatorLogin { get; set; }
+    public bool RequiredPalletBind { get; set; }
+    public required string[] BindKeys { get; set; }
 }
 
-public class Resultpolicy
+public class ResultPolicy
 {
-    public required string uploadMode { get; set; }
-    public required string idempotencyKeyMode { get; set; }
-    public bool storeTechnicalLogs { get; set; }
-    public bool storeStepMetrics { get; set; }
-    public bool storeEvidence { get; set; }
+    public required string UploadMode { get; set; }
+    public required string IdempotencyKeyMode { get; set; }
+    public bool StoreTechnicalLogs { get; set; }
+    public bool StoreStepMetrics { get; set; }
+    public bool StoreEvidence { get; set; }
 }
 
 public class Identification
 {
-    public required Serialnumber serialNumber { get; set; }
-    public required Imei imei { get; set; }
+    public required SerialNumber SerialNumber { get; set; }
+    public required Imei Imei { get; set; }
 }
 
-public class Serialnumber
+public class SerialNumber
 {
-    public bool required { get; set; }
-    public required string source { get; set; }
-    public required string pattern { get; set; }
+    public bool Required { get; set; }
+    public required string Source { get; set; }
+    public required string Pattern { get; set; }
 }
 
 public class Imei
 {
-    public bool required { get; set; }
-    public required string source { get; set; }
-    public required Validation validation { get; set; }
+    public bool Required { get; set; }
+    public required string Source { get; set; }
+    public required Validation Validation { get; set; }
 }
 
 public class Validation
 {
-    public int length { get; set; }
-    public bool luhn { get; set; }
+    public int Length { get; set; }
+    public bool Luhn { get; set; }
 }
 
 public class TestEnvironment
 {
-    public required Wifi wifi { get; set; }
-    public required Bluetooth bluetooth { get; set; }
-    public required Gps gps { get; set; }
+    public required Wifi Wifi { get; set; }
+    public required Bluetooth Bluetooth { get; set; }
+    public required Gps Gps { get; set; }
 }
 
 public class Wifi
 {
-    public required string targetSsid { get; set; }
-    public required string security { get; set; }
-    public int minRssiDbm { get; set; }
-    public int stabilityWindowSec { get; set; }
+    public required string TargetSsid { get; set; }
+    public required string Security { get; set; }
+    public int MinRssiDbm { get; set; }
+    public int StabilityWindowSec { get; set; }
 }
 
 public class Bluetooth
 {
-    public int scanTimeoutSec { get; set; }
-    public int minDevicesFound { get; set; }
-    public int minRelativeRssiDbm { get; set; }
+    public int ScanTimeoutSec { get; set; }
+    public int MinDevicesFound { get; set; }
+    public int MinRelativeRssiDbm { get; set; }
 }
 
 public class Gps
 {
-    public int maxFixTimeSec { get; set; }
-    public int minSatellites { get; set; }
-    public float minAccuracyMeters { get; set; }
+    public int MaxFixTimeSec { get; set; }
+    public int MinSatellites { get; set; }
+    public float MinAccuracyMeters { get; set; }
 }
 
-public class Thresholdprofiles
+public class ThresholdProfiles
 {
-    public required Audio audio { get; set; }
-    public required Camera camera { get; set; }
+    public required Audio Audio { get; set; }
+    public required Camera Camera { get; set; }
 }
 
 public class Audio
 {
-    public required Speaker speaker { get; set; }
-    public required Receiver receiver { get; set; }
-    public required Microphone microphone { get; set; }
+    public required Speaker Speaker { get; set; }
+    public required Receiver Receiver { get; set; }
+    public required Microphone Microphone { get; set; }
 }
 
 public class Speaker
 {
-    public float minPeakDb { get; set; }
-    public float maxNoiseFloorDb { get; set; }
-    public int expectedFreqHz { get; set; }
-    public int toleranceHz { get; set; }
+    public float MinPeakDb { get; set; }
+    public float MaxNoiseFloorDb { get; set; }
+    public int ExpectedFreqHz { get; set; }
+    public int ToleranceHz { get; set; }
 }
 
 public class Receiver
 {
-    public float minPeakDb { get; set; }
-    public float maxNoiseFloorDb { get; set; }
-    public int expectedFreqHz { get; set; }
-    public int toleranceHz { get; set; }
+    public float MinPeakDb { get; set; }
+    public float MaxNoiseFloorDb { get; set; }
+    public int ExpectedFreqHz { get; set; }
+    public int ToleranceHz { get; set; }
 }
 
 public class Microphone
 {
-    public float minCapturedDb { get; set; }
-    public float maxClippingPercent { get; set; }
+    public float MinCapturedDb { get; set; }
+    public float MaxClippingPercent { get; set; }
 }
 
 public class Camera
 {
-    public required Rear rear { get; set; }
-    public required Front front { get; set; }
+    public required Rear Rear { get; set; }
+    public required Front Front { get; set; }
 }
 
 public class Rear
 {
-    public float minBlurScore { get; set; }
-    public float minBrightness { get; set; }
-    public float maxBrightness { get; set; }
-    public bool chartRequired { get; set; }
-    public float minSsim { get; set; }
+    public float MinBlurScore { get; set; }
+    public float MinBrightness { get; set; }
+    public float MaxBrightness { get; set; }
+    public bool ChartRequired { get; set; }
+    public float WinSsim { get; set; }
 }
 
 public class Front
 {
-    public float minBlurScore { get; set; }
-    public float minBrightness { get; set; }
-    public float maxBrightness { get; set; }
-    public bool chartRequired { get; set; }
+    public float MinBlurScore { get; set; }
+    public float MinBrightness { get; set; }
+    public float MaxBrightness { get; set; }
+    public bool ChartRequired { get; set; }
 }
 
-public class Finaldecisionpolicy
+public class FinalDecisionPolicy
 {
-    public required Passif passIf { get; set; }
-    public required Failif failIf { get; set; }
-    public required Ngclassification ngClassification { get; set; }
+    public required PassIf PassIf { get; set; }
+    public required FailIf FailIf { get; set; }
+    public required NgClassification NgClassification { get; set; }
 }
 
-public class Passif
+public class PassIf
 {
-    public bool allCriticalStepsPassed { get; set; }
+    public bool AllCriticalStepsPassed { get; set; }
 }
 
-public class Failif
+public class FailIf
 {
-    public bool anyCriticalStepFailed { get; set; }
+    public bool AnyCriticalStepFailed { get; set; }
 }
 
-public class Ngclassification
+public class NgClassification
 {
-    public required string criticalFailure { get; set; }
-    public required string nonCriticalFailure { get; set; }
+    public required string CriticalFailure { get; set; }
+    public required string NonCriticalFailure { get; set; }
 }
 
-public class Offlinepolicy
+public class OfflinePolicy
 {
-    public bool enabled { get; set; }
-    public bool localQueueEnabled { get; set; }
-    public int maxPendingExecutions { get; set; }
-    public required Retrypolicy retryPolicy { get; set; }
+    public bool Enabled { get; set; }
+    public bool LocalQueueEnabled { get; set; }
+    public int MaxPendingExecutions { get; set; }
+    public required RetryPolicy RetryPolicy { get; set; }
 }
 
-public class Retrypolicy
+public class RetryPolicy
 {
-    public required string strategy { get; set; }
-    public int maxRetries { get; set; }
-    public int initialDelayMs { get; set; }
-    public int maxDelayMs { get; set; }
+    public required string Strategy { get; set; }
+    public int MaxRetries { get; set; }
+    public int InitialDelayMs { get; set; }
+    public int MaxDelayMs { get; set; }
 }
 
 public class Audit
 {
-    public bool requirePublicationAudit { get; set; }
-    public required string[] fieldsTracked { get; set; }
+    public bool RequirePublicationAudit { get; set; }
+    public required string[] FieldsTracked { get; set; }
 }
 
 public class Step
 {
-    public required string stepId { get; set; }
-    public int order { get; set; }
-    public required string testId { get; set; }
-    public required string name { get; set; }
-    public required string type { get; set; }
-    public required string group { get; set; }
-    public bool critical { get; set; }
-    public bool enabled { get; set; }
-    public int timeoutSec { get; set; }
-    public int retries { get; set; }
-    public required string[] capabilityRequired { get; set; }
+    public required string StepId { get; set; }
+    public int Order { get; set; }
+    public required string TestId { get; set; }
+    public required string Name { get; set; }
+    public required string Type { get; set; }
+    public required string Group { get; set; }
+    public bool Critical { get; set; }
+    public bool Enabled { get; set; }
+    public int TimeoutSec { get; set; }
+    public int Retries { get; set; }
+    public required string[] CapabilityRequired { get; set; }
 
 
  
-    public JsonElement passCriteria { get; set; }
+    public JsonElement PassCriteria { get; set; }
 
-    public JsonElement  @params { get; set; }
-    public required Onfail onFail { get; set; }
+    [JsonPropertyName("params")]
+    public JsonElement StepParams { get; set; }
+    public required OnFail OnFail { get; set; }
 }
 
-public class Passcriteria
+public class PassCriteria
 {
-    public bool serialNumberRequired { get; set; }
-    public bool imeiRequired { get; set; }
-    public bool modelMatchRequired { get; set; }
-    public bool mustConnectToTargetSsid { get; set; }
-    public int minRssiDbm { get; set; }
-    public int stabilityWindowSec { get; set; }
-    public int minDevicesFound { get; set; }
-    public bool simMustBePresent { get; set; }
-    public int maxFixTimeSec { get; set; }
-    public int minSatellites { get; set; }
-    public float minAccuracyMeters { get; set; }
-    public bool mustMatchRecipe { get; set; }
-    public bool batteryPresent { get; set; }
-    public bool usbAttached { get; set; }
-    public bool chargingDetected { get; set; }
-    public float batteryTempMaxC { get; set; }
-    public float speakerMinPeakDb { get; set; }
-    public float micMinCapturedDb { get; set; }
-    public float minBlurScore { get; set; }
-    public bool chartRequired { get; set; }
-    public float minSsim { get; set; }
-    public bool allCriticalTestsMustPass { get; set; }
+    public bool SerialNumberRequired { get; set; }
+    public bool ImeiRequired { get; set; }
+    public bool ModelMatchRequired { get; set; }
+    public bool MustConnectToTargetSsid { get; set; }
+    public int MinRssiDbm { get; set; }
+    public int StabilityWindowSec { get; set; }
+    public int MinDevicesFound { get; set; }
+    public bool SimMustBePresent { get; set; }
+    public int MaxFixTimeSec { get; set; }
+    public int MinSatellites { get; set; }
+    public float MinAccuracyMeters { get; set; }
+    public bool MustMatchRecipe { get; set; }
+    public bool BatteryPresent { get; set; }
+    public bool UsbAttached { get; set; }
+    public bool ChargingDetected { get; set; }
+    public float BatteryTempMaxC { get; set; }
+    public float SpeakerMinPeakDb { get; set; }
+    public float MicMinCapturedDb { get; set; }
+    public float MinBlurScore { get; set; }
+    public bool ChartRequired { get; set; }
+    public float MinSsim { get; set; }
+    public bool AllCriticalTestsMustPass { get; set; }
 }
 
 public class Params
 {
-    public bool collectBuildInfo { get; set; }
-    public bool collectAndroidVersion { get; set; }
-    public bool collectDeviceFingerprint { get; set; }
-    public required string targetSsid { get; set; }
-    public bool recordIpAddress { get; set; }
-    public int scanTimeoutSec { get; set; }
-    public int minRelativeRssiDbm { get; set; }
-    public required string[] acceptedStates { get; set; }
-    public int warmupSec { get; set; }
-    public int expectedRamMb { get; set; }
-    public int expectedStorageGb { get; set; }
-    public required string cpuFamily { get; set; }
-    public bool collectBatteryHealth { get; set; }
-    public bool collectBatteryLevel { get; set; }
-    public int toneFrequencyHz { get; set; }
-    public int toneDurationMs { get; set; }
-    public int fftWindowSize { get; set; }
-    public bool useLoopback { get; set; }
-    public required string cameraLens { get; set; }
-    public int captureCount { get; set; }
-    public bool useChartComparison { get; set; }
-    public bool showOperatorSummary { get; set; }
-    public bool generateExecutionHash { get; set; }
+    public bool CollectBuildInfo { get; set; }
+    public bool CollectAndroidVersion { get; set; }
+    public bool CollectDeviceFingerprint { get; set; }
+    public required string TargetSsid { get; set; }
+    public bool RecordIpAddress { get; set; }
+    public int ScanTimeoutSec { get; set; }
+    public int MinRelativeRssiDbm { get; set; }
+    public required string[] AcceptedStates { get; set; }
+    public int WarmupSec { get; set; }
+    public int ExpectedRamMb { get; set; }
+    public int ExpectedStorageGb { get; set; }
+    public required string CpuFamily { get; set; }
+    public bool CollectBatteryHealth { get; set; }
+    public bool CollectBatteryLevel { get; set; }
+    public int ToneFrequencyHz { get; set; }
+    public int ToneDurationMs { get; set; }
+    public int FftWindowSize { get; set; }
+    public bool UseLoopback { get; set; }
+    public required string CameraLens { get; set; }
+    public int CaptureCount { get; set; }
+    public bool UseChartComparison { get; set; }
+    public bool ShowOperatorSummary { get; set; }
+    public bool GenerateExecutionHash { get; set; }
 }
 
-public class Onfail
+public class OnFail
 {
-    public required string action { get; set; }
-    public required string resultCode { get; set; }
+    public required string Action { get; set; }
+    public required string ResultCode { get; set; }
 }
